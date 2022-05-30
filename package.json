@@ -27,6 +27,7 @@
     "build:release": "webpack --progress --config build/webpack.prod.config.js",
     "version": "node ./build/writeVersion.js",
     "dev": "webpack-dev-server --config build/webpack.dev.config.js",
+    "start": "webpack-dev-server --config build/webpack.dev.config.js",
     "bundle": "inline-source --compress false --root ./dist ./dist/index.html",
     "commit": "git cz",
     "semantic-release": "semantic-release",
