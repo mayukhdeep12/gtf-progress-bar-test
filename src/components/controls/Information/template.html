@@ -1,0 +1,19 @@
+<div
+  v-if="available"
+>
+  <vtk-image-data :dataset="source.getDataset()" color="#001529"/>
+  <vtk-molecule :dataset="source.getDataset()" />
+  <vtk-poly-data :dataset="source.getDataset()"  />
+  <vtk-field-data
+  color="#001529"
+    :dataset="source.getDataset()"
+    name="Point Data"
+    type="PointData"
+  />
+  <vtk-field-data
+  color="#001529"
+    :dataset="source.getDataset()"
+    name="Cell Data"
+    type="CellData"
+  />
+</div>

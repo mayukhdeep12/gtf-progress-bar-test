@@ -1,0 +1,193 @@
+.container {
+  padding: 8px;
+  background-color: #001529 !important;
+}
+
+.container * {
+  user-select: none;
+}
+
+.fullWidth {
+  width: 50%;
+}
+
+.labelInput {
+  width: 50%;
+}
+
+.paintActions {
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  padding: 16px;
+}
+
+.paintSwitch {
+  margin-top: 0;
+  flex: 2;
+  color: #fff;
+}
+
+.radioGroup {
+  width: 100%;
+  margin-top: 0;
+}
+
+.radioGroup > :global(.v-input__control) {
+  width: 100%;
+}
+
+.headerRow {
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  padding: 0;
+}
+
+.listRow {
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  justify-content: flex-start;
+  overflow: visible;
+}
+
+.lowercaseText {
+  text-transform: none;
+  font-weight: normal;
+}
+
+.colorBoxBackground {
+  cursor: pointer;
+  flex: 0 0 20px;
+  width: 20px;
+  height: 20px;
+  box-shadow: inset 0 0 1px 1px rgba(0, 0, 0, 0.1);
+  margin-left: -20px;
+  background-image: linear-gradient(-45deg, #ccc 25%, transparent 25%, 75%, #ccc 75%),
+                    linear-gradient(-45deg, #ccc 25%, transparent 25%, 75%, #ccc 75%);
+  background-size: 10px 10px;
+  background-position: 0 0, -5px 5px;
+  background-repeat: repeat;
+}
+
+.colorBox {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  box-shadow: inset 0 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+.colorPicker {
+  width: 200px;
+  padding: 8px;
+  overflow: hidden;
+}
+
+.opacitySlider {
+  width: 90%;
+}
+
+.activeRadio {
+  margin-right: -8px;
+}
+
+/*label*/
+.container {
+  padding: 8px;
+}
+
+.container * {
+  user-select: none;
+}
+
+.fullWidth {
+  width: 100%;
+}
+
+.heading {
+  padding: 8px 0;
+}
+
+.popup {
+  width: 250px;
+  overflow: hidden;
+}
+
+.toolButton {
+  /* override vuetify */
+  min-width: unset !important;
+  /* override vuetify */
+  padding: 0 6px !important;
+}
+
+.tools {
+  text-align: center;
+}
+
+.toolIcon {
+  height: 20px;
+  width: 20px;
+}
+
+.row {
+  width: 100%;
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+}
+
+.rowAvatar {
+  flex: 0;
+  margin: 8px;
+}
+
+.rowContent {
+  flex: 2;
+  display: flex;
+  flex-flow: column;
+  margin: 8px;
+  min-width: 0;
+}
+
+.rowContentName {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 0 4px;
+}
+
+.rowContentDetails {
+  font-style: italic;
+  color: #444;
+  padding: 0 4px;
+}
+
+.action {
+  margin: 0 2px;
+}
+
+.toolIconOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: #fff;
+  opacity: 0.75;
+}
+
+.custom-placeholer-color input::placeholder {
+  color: red!important;
+  opacity: 1;
+}
+
+.custom-label-color .v-label {
+  color: red;
+  opacity: 1;
+}
+
+.custom-placeholer-color input,
+.custom-label-color input{
+  color: red!important;
+}

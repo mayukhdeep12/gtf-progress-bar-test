@@ -1,0 +1,189 @@
+<drag-and-drop
+  :enabled="!landingVisible && !fileUploadDialog"
+  v-on:drop="openFileList"
+>
+  <template v-slot:default="{ dragHover }">
+    <v-app>
+      <v-navigation-drawer 
+        v-model="controlsDrawer"
+        :clipped="$vuetify.breakpoint.mdAndUp"
+        :mobile-breakpoint="$vuetify.breakpoint.thresholds.sm"
+        app
+        fixed
+        disable-resize-watcher
+        touchless
+        width="300"
+      >
+        <controls-drawer/>
+      </v-navigation-drawer>
+
+      <v-app-bar color="#001529"
+      elevation="4" app clipped-left>
+        <!-- <v-app-bar-nav-icon 
+          :disabled="landingVisible"
+          @click.native.stop="controlsDrawer = !controlsDrawer"
+        /> -->
+        <!-- <v-app-bar-nav-icon icon
+        @click.native.stop="controlsDrawer = !controlsDrawer" >  
+            <v-icon color = "white">mdi-menu</v-icon>
+        </v-app-bar-nav-icon> -->
+        <v-tooltip 
+          bottom
+          :disabled="smallScreen"
+        >
+          <template v-slot:activator="{ on }" >
+            <a
+              href="https://www.google.com/"
+              v-on="on"
+              
+            >
+            <v-img
+              class="mx-2"
+              src="https://rediminds-test.s3.ap-south-1.amazonaws.com/Rediminds-logo.svg"
+              max-height="80"
+              max-width="180"
+              contain
+            ></v-img> 
+            
+            
+            </a>
+          </template>
+          <span v-if="landingVisible" key="if-landingVisible">Go to app</span>
+          <span v-else key="if-landingVisible">Back to landing page</span>
+        </v-tooltip>
+        
+        
+        <v-layout justify-center>
+          <span class="white--text font-weight-bold headline" >Ground Truth Factory</span>
+		      <span class="red--text ml-2 font-weight-bold headline"> Medical Imaging Viewer</span>
+        </v-layout>
+        <v-toolbar-items>
+          <v-btn
+            v-if="errors.length"
+            key="if-has-errors"
+            text
+            color="error"
+            v-on:click="errorDialog = true"
+          >
+            <v-icon left>mdi-alert-circle</v-icon>
+            <span>{{ errors.length }}</span>
+            &nbsp;
+            <span v-show="!smallScreen">error(s)</span>
+          </v-btn>
+        </v-toolbar-items>
+        <collapsible-toolbar
+          :collapse="$vuetify.breakpoint.xsOnly"
+          :dense="smallScreen"
+        >
+          <template v-slot:default="{ state }">
+
+              <collapsible-toolbar-item
+              v-show="!landingVisible"
+              >
+              <a href="https://www.google.com/" class="text-decoration-none">
+                <v-icon color="white" left>mdi-home</v-icon>
+                <span class="white--text pt-2">Home</span>
+              </a>
+              </collapsible-toolbar-item>
+
+            <!-- <collapsible-toolbar-item
+              v-on:click="showFileUpload"
+              :state="state"
+            >
+            
+              <v-icon color="white" left>mdi-folder</v-icon>
+              <span class="white--text" v-show="state !== 'dense'">Open</span>
+        
+            </collapsible-toolbar-item> -->
+            
+          </template>
+        </collapsible-toolbar>
+      </v-app-bar>
+
+      <v-content
+        :id="$style.appContent"
+        :style="{
+          position: landingVisible ? 'initial' : 'fixed',
+        }"
+      >
+        <landing
+          v-if="landingVisible"
+          key="if-landing"
+          v-on:open="showFileUpload"
+          v-on:open-urls="autoLoadRemotes"
+          v-on:open-files="openFileList"
+        />
+        <layout-view v-else key="if-landing" />
+      </v-content>
+
+      <!-- file loader -->
+      <file-loader
+        v-model="fileUploadDialog"
+        v-on:load="doneLoadingFiles"
+      />
+
+      <v-dialog v-model="autoloadDialog" persistent width="60%">
+        <v-card class="pa-4">
+          <v-card-title
+            class="justify-center text-center title black--text pv-break-word"
+          >
+            Loading {{ autoloadLabel }}...
+          </v-card-title>
+        </v-card>
+      </v-dialog>
+
+      <!-- state generator -->
+      <state-file-generator />
+
+      <!-- dnd overlay -->
+      <div
+        :class="{ [$style.overlay]: true, [$style.overlayVisible]: dragHover }"
+      >
+        <div :class="$style.overlayText">
+          <div class="display-3">Drop files here</div>
+          <v-icon size="4.75rem">mdi-publish</v-icon>
+        </div>
+      </div>
+
+      <!-- browser issues -->
+      <browser-issues />
+
+      <!-- about dialog -->
+      <component
+        :is="dialogType"
+        v-model="aboutDialog"
+        max-width="50%"
+      >
+        <about-box v-on:close="aboutDialog = false" />
+      </component>
+
+      <!-- error dialog-->
+      <component
+        :is="dialogType"
+        v-model="errorDialog"
+        max-width="50%"
+      >
+        <error-box
+          :errors="errors"
+          v-on:close="errorDialog = false"
+          v-on:clear="errors = []"
+        />
+      </component>
+
+      <v-snackbar
+        :value="!!globalSingleNotification"
+        @input="globalSingleNotification = ''"
+        bottom
+        left
+        :timeout="notifyPermanent ? 0 : 6000"
+        @click="globalSingleNotification = ''"
+      >
+        {{ globalSingleNotification }}
+        <v-btn text>close</v-btn>
+      </v-snackbar>
+
+      <!-- portal mount point -->
+      <div id="app-portal-mount" />
+    </v-app>
+  </template>
+</drag-and-drop>

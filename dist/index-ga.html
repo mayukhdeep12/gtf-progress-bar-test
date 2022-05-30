@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="google" value="notranslate">
+    <title>RediMinds Annotation Tool</title>
+    <meta name="description" content="Data Viewer in a browser">
+    <link inline rel="icon" type="image/png" href="">
+    <style>
+    html {
+      overflow: hidden !important;
+      width: 100%;
+    }
+    body {
+      width: 100%;
+      height: 100%;
+      position: fixed;
+      overflow-y: scroll;
+    }
+    </style>
+    
+    <link inline rel="stylesheet" href="vendors.cd205fff4946b8920f5f.css">
+    
+    <link inline rel="stylesheet" href="glance.4c76937edb9e0280b357.css">
+    
+    
+    
+    
+    
+    <script inline src="version.js"></script>
+    
+      <script inline src="runtime.9318517ed0f5fd41d22b.js"></script>
+    
+      <script inline src="vendors.55b0d117bacc0546e805.js"></script>
+    
+      <script inline src="glance.d68e93de4f8055771405.js"></script>
+    
+      <script src="glance-external-ITKReader.529bcc38b41be5b9ea41.js"></script>
+    
+      <script src="glance-external-Workbox.6001581f3cba31ff9ea4.js"></script>
+    
+  </head>
+  <body>
+    <div id="root-container"></div>
+    <script>
+      const container = document.querySelector('#root-container');
+      const glanceInstance = Glance.createViewer(container);
+      glanceInstance.processURLArgs();
+    </script>
+  </body>
+</html>

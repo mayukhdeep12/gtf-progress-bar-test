@@ -1,0 +1,8 @@
+.container {
+  padding: 0 8px 8px 8px;
+  background-color: #001529 !important;
+}
+
+.container * {
+  user-select: none;
+}
